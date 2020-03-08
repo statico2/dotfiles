@@ -89,11 +89,17 @@ done
 echo "Setting up vim plugins..."
 zsh .vim/update.sh
 
-if [ -z "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
-  echo "Setting up git..."
-  cp "$basedir/.gitconfig.base" "$HOME/.gitconfig"
+echo "Setting up git..."
+if [ -n "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
+  # We must be setting up a VS Code remote dev container. VS Code won't add a
+  # .gitconfig if one already exists, so we need to put ours in a magical secondary
+  # location I found by reading the Git docs.
+  altdir="$HOME/.althome"
+  mkdir -p "$altdir/git"
+  echo "export XDG_CONFIG_HOME=\"$altdir\"" >>"$HOME/.zshlocal"
+  cp "$basedir/.gitconfig.base" "$altdir/git/config"
 else
-  echo "Skipping .gitconfig creation in VS Code remote dev container"
+  cp "$basedir/.gitconfig.base" "$HOME/.gitconfig"
 fi
 if which git-lfs >/dev/null 2>&1 ; then
   git lfs install
