@@ -640,6 +640,9 @@ bindkey -s '^Z' '^Ufg^M'
 # Trying out Facebook PathPicker
 bindkey -s '\ex' ' |fpp^M'
 
+# ^L doesn't work properly in VS Code terminals. https://github.com/microsoft/vscode/issues/75141
+bindkey -s '^L' '^Uclear^M'
+
 # More custom bindings
 bindkey "^O" copy-prev-shell-word
 bindkey "^Q" push-line
