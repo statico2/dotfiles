@@ -3,6 +3,8 @@
 
 set -eo pipefail
 
+env
+
 basedir="$HOME/.dotfiles"
 bindir="$HOME/bin"
 repourl="git://github.com/statico/dotfiles.git"
