@@ -86,14 +86,18 @@ for item in bin/* ; do
   symlink "$basedir/$item" "$bindir/$(basename $item)"
 done
 
-echo "Setting up vim plugins..."
-.vim/update.sh
+if [ -n "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
+  # We must be setting up a VS Code remote dev container, so I probably won't use Vim.
+  echo "VS Code remote environment detected. Skipping Vim setup."
+else
+  echo "Setting up vim plugins..."
+  .vim/update.sh
+fi
 
 echo "Setting up git..."
 if [ -n "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
-  # We must be setting up a VS Code remote dev container. VS Code won't add a
-  # .gitconfig if one already exists, so we need to put ours in a magical secondary
-  # location I found by reading the Git docs.
+  # VS Code won't add a .gitconfig if one already exists, so we need to put
+  # ours in a magical secondary location I found by reading the Git docs.
   altdir="$HOME/.althome"
   mkdir -p "$altdir/git"
   echo "export XDG_CONFIG_HOME=\"$altdir\"" >>"$HOME/.zshlocal"
