@@ -3,8 +3,6 @@
 
 set -eo pipefail
 
-env
-
 basedir="$HOME/.dotfiles"
 bindir="$HOME/bin"
 repourl="git://github.com/statico/dotfiles.git"
@@ -91,7 +89,7 @@ done
 echo "Setting up vim plugins..."
 zsh .vim/update.sh
 
-if [ -z "$VSCODE_IPC_HOOK_CLI" ]; then
+if [ -z "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
   echo "Setting up git..."
   cp "$basedir/.gitconfig.base" "$HOME/.gitconfig"
 else
