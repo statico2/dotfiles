@@ -28,7 +28,7 @@ function symlink() {
         echo "Error: "$backup" already exists. Please delete or rename it."
         exit 1
       fi
-      mv -v "$dest" "$backup"
+      mv "$dest" "$backup"
     fi
   fi
   ln -sf "$src" "$dest"
@@ -87,7 +87,7 @@ for item in bin/* ; do
 done
 
 echo "Setting up vim plugins..."
-zsh .vim/update.sh
+.vim/update.sh
 
 echo "Setting up git..."
 if [ -n "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
