@@ -50,7 +50,11 @@ repos=(
 set -e
 dir=~/.dotfiles/.vim/bundle
 
+echo "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+echo "VSCODE_REMOTE_CONTAINERS_SESSION=$VSCODE_REMOTE_CONTAINERS_SESSION"
+echo "env="
 env
+echo "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
 
 if [ ! -z "$VSCODE_REMOTE_CONTAINERS_SESSION" ]; then
   # I probably won't be using Vim if this is a VS Code remote development container.
