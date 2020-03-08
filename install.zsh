@@ -89,8 +89,12 @@ done
 echo "Setting up vim plugins..."
 zsh .vim/update.sh
 
-echo "Setting up git..."
-cp "$basedir/.gitconfig.base" "$HOME/.gitconfig"
+if [ -z "$VSCODE_IPC_HOOK_CLI" ]; then
+  echo "Setting up git..."
+  cp "$basedir/.gitconfig.base" "$HOME/.gitconfig"
+else
+  echo "Skipping .gitconfig creation in VS Code remote dev container"
+fi
 if which git-lfs >/dev/null 2>&1 ; then
   git lfs install
 fi

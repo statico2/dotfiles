@@ -50,6 +50,11 @@ repos=(
 set -e
 dir=~/.dotfiles/.vim/bundle
 
+if [ -n "$VSCODE_IPC_HOOK_CLI" ]; then
+  # I probably won't be using Vim if this is a VS Code remote development container.
+  echo "VS Code remote environment detected. Skipping."
+fi
+
 if [ -d "$dir" -a -z "$1" ]; then
   if which trash &>/dev/null; then
     echo "▲ Moving old bundle dir to trash"
